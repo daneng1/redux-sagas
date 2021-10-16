@@ -1,19 +1,19 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const fetchCountries = createAction('FETCH_COUNTRIES_REQUEST');
+const fetchCountryDetail = createAction('FETCH_COUNTRY_DETAIL_REQUEST');
 
-const fetchCountriesSuccess = createAction(
-  'FETCH_COUNTRIES_SUCCESS',
-  countries => {
+const fetchCountryDetailSuccess = createAction(
+  'FETCH_COUNTRY_DETAIL_SUCCESS',
+  countryDetail => {
     return {
       payload: {
-        countries,
+        countryDetail,
       },
     };
   },
 );
 
-const fetchCountriesError = createAction('FETCH_COUNTRIES_ERROR', error => {
+const fetchCountryDetailError = createAction('FETCH_COUNTRY_DETAIL_ERROR', error => {
   return {
     payload: {
       error,
@@ -22,7 +22,7 @@ const fetchCountriesError = createAction('FETCH_COUNTRIES_ERROR', error => {
 });
 
 export const actions = {
-  fetchCountries,
-  fetchCountriesSuccess,
-  fetchCountriesError,
+  fetchCountryDetail,
+  fetchCountryDetailSuccess,
+  fetchCountryDetailError,
 };

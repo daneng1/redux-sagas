@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { CountryDetailsState } from './types';
+import { CountryDetailState } from './types';
 import { RootState } from 'types';
 import { initialState } from './reducer';
 
@@ -16,7 +16,7 @@ export const selectError = createSelector(
   countryDetailState => countryDetailState.error,
 );
 
-export const selectCountries = createSelector(
+export const selectCountryDetail = createSelector(
   [selectDomain],
-  (countryDetailState: CountryDetailsState) => countryDetailState.countries,
+  (countryDetailState: CountryDetailState) => countryDetailState.countryDetail,
 );

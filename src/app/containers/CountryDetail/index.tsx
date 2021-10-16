@@ -3,35 +3,44 @@ import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { saga } from './saga';
-import { key, countriesReducer } from './reducer';
+import { key, countryDetailReducer } from './reducer';
 import { actions } from './actions';
-import { selectCountries, selectLoading, selectError } from './selectors';
+import { selectCountryDetail, selectLoading, selectError } from './selectors';
 import { LoadingIndicator } from 'app/components/LoadingIndicator';
 import { Link } from 'app/components/Link';
 import { PageWrapper } from 'app/components/PageWrapper';
 
 export function CountryDetail() {
-  useInjectReducer({ key: key, reducer: countriesReducer });
+  useInjectReducer({ key: key, reducer: countryDetailReducer });
   useInjectSaga({ key: key, saga });
 
-  const countries = useSelector(selectCountries);
+  const countryDetail = useSelector(selectCountryDetail);
+  console.log('index.js Country Details', countryDetail);
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.fetchCountries());
+    dispatch(actions.fetchCountryDetail());
   }, [dispatch]);
 
   return (
     <PageWrapper>
-      <h1>Countries</h1>
+      <h1>Country Details</h1>
       {isLoading && <LoadingIndicator small />}
-      {countries?.length > 0 ? (
+      {countryDetail ? (
+        <>
         <List>
-          <p>country</p>
-          <p>currency</p>
+          <p>COUNTRY: {countryDetail.name}</p>
+          <p>CURRENCY CODE: {countryDetail.currency_code}</p>
         </List>
+        <div>
+          <Link to={`/countries/`}>Countries List</Link>
+        </div>
+        <div>
+          <Link to={`/`}>Home</Link>
+        </div>
+        </>
       ) : error ? (
         <ErrorText>{error}</ErrorText>
       ) : null}
@@ -39,9 +48,9 @@ export function CountryDetail() {
   );
 }
 
-const Country = styled.li`
-  color: blue;
-`;
+// const Country = styled.li`
+//   color: blue;
+// `;
 
 const ErrorText = styled.span`
   color: ${p => p.theme.text};
