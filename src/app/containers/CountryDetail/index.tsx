@@ -10,7 +10,7 @@ import { LoadingIndicator } from 'app/components/LoadingIndicator';
 import { Link } from 'app/components/Link';
 import { PageWrapper } from 'app/components/PageWrapper';
 
-export function Countries() {
+export function CountryDetail() {
   useInjectReducer({ key: key, reducer: countriesReducer });
   useInjectSaga({ key: key, saga });
 
@@ -29,11 +29,8 @@ export function Countries() {
       {isLoading && <LoadingIndicator small />}
       {countries?.length > 0 ? (
         <List>
-          {countries.map(country => (
-            <Country key={country.id}>
-              <Link to={`/country/${country.id}`}>{country.name}</Link>
-            </Country>
-          ))}
+          <p>country</p>
+          <p>currency</p>
         </List>
       ) : error ? (
         <ErrorText>{error}</ErrorText>
