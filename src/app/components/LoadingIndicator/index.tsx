@@ -41,6 +41,10 @@ const Svg = styled.svg<SvgProps>`
   height: ${p => (p.small ? '1.25rem' : '3rem')};
   width: ${p => (p.small ? '1.25rem' : '3rem')};
   transform-origin: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
 `;
 
 const Circle = styled.circle`

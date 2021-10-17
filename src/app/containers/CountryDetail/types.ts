@@ -1,8 +1,8 @@
 import { Country } from 'types/Country';
 
 /* --- STATE --- */
-export interface CountriesState {
+export interface CountryDetailState {
   isLoading: boolean;
   error?: string;
-  countries: Country[];
+  countryDetail: Country;
 }
