@@ -17,7 +17,6 @@ export const countryDetailReducer = createReducer(initialState, {
   FETCH_COUNTRY_DETAIL_SUCCESS: (state, action) => {
     state.isLoading = false;
     state.countryDetail = action.payload.countryDetail;
-    console.log('inside reducer', state.countryDetail);
   },
   FETCH_COUNTRY_DETAIL_ERROR: (state, action) => {
     state.isLoading = false;

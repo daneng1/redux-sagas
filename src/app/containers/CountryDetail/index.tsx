@@ -1,28 +1,38 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components/macro';
+import { RouteComponentProps } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+
+import styled from 'styled-components/macro';
+
 import { saga } from './saga';
 import { key, countryDetailReducer } from './reducer';
 import { actions } from './actions';
 import { selectCountryDetail, selectLoading, selectError } from './selectors';
+
 import { LoadingIndicator } from 'app/components/LoadingIndicator';
 import { Link } from 'app/components/Link';
 import { PageWrapper } from 'app/components/PageWrapper';
 
-export function CountryDetail() {
+// Used RouteComponentProps to pass the country ID from the Country component into the fetchCountryDetail action
+type MatchParams = {
+  id: string
+}
+
+export function CountryDetail(props: RouteComponentProps<MatchParams>) {
+  const id = props.match.params.id;
+
   useInjectReducer({ key: key, reducer: countryDetailReducer });
   useInjectSaga({ key: key, saga });
 
   const countryDetail = useSelector(selectCountryDetail);
-  console.log('index.js Country Details', countryDetail);
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.fetchCountryDetail());
-  }, [dispatch]);
+    dispatch(actions.fetchCountryDetail(id));
+  }, [dispatch, id]);
 
   return (
     <PageWrapper>
@@ -48,9 +58,6 @@ export function CountryDetail() {
   );
 }
 
-// const Country = styled.li`
-//   color: blue;
-// `;
 
 const ErrorText = styled.span`
   color: ${p => p.theme.text};

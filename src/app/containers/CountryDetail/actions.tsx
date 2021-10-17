@@ -1,6 +1,14 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const fetchCountryDetail = createAction('FETCH_COUNTRY_DETAIL_REQUEST');
+const fetchCountryDetail = createAction('FETCH_COUNTRY_DETAIL_REQUEST',
+  id => {
+    return {
+      payload: {
+        id,
+      },
+    };
+  },
+);
 
 const fetchCountryDetailSuccess = createAction(
   'FETCH_COUNTRY_DETAIL_SUCCESS',
