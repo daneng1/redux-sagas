@@ -4,7 +4,7 @@ import { actions } from './actions';
 
 export function* fetchCountryDetail(action: any) {
 
-  //Add id dynamically through Action payload
+  //Add id dynamically through Action payload, had to hard code it before getting this to work
   const id = action.payload.id;
   const requestURL = `https://api.carerev.com/api/v1/countries/${id}`;
 
@@ -16,7 +16,7 @@ export function* fetchCountryDetail(action: any) {
     } else {
       yield put(actions.fetchCountryDetailError('No country details found.'));
     }
-  } catch (err) {
+  } catch (err: any) {
     yield put(actions.fetchCountryDetailError(err.toString()));
   }
 }
